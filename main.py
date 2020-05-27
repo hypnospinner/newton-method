@@ -242,34 +242,42 @@ if success:
     print(f"F(root):\n{F(root)}\n")
 else:
     print("Default method failed")
-    
+
 print("\nMODIFIED NEWTON METHOD\n")
 
-try:
-    success, root, iterations, operations, dt = mod_appr(F, J, x, 1e-4, 7)
-    if success:
-        print(f"Root:\n{root}\n")
-        print(f"Iterations: {iterations}\n")
-        print(f"Operations: {operations}\n")
-        print(f"Delta time: {dt}\n")
-        print(f"F(root):\n{F(root)}\n")
-    else:
-        print("Modified method failed")
-except OverflowError:
-    print("Modified method failed")
+for i in range(1, 10 + 1):
 
-try:
-    success, root, iterations, operations, dt = hyprid_appr(F, J, x, 1e-4)
+    print(f"k = {i}\n")
 
-    print("\nHYBRID NEWTON METHOD\n")
+    try:
+        success, root, iterations, operations, dt = mod_appr(F, J, x, 1e-4, i)
+        if success:
+            print(f"Root:\n{root}\n")
+            print(f"Iterations: {iterations}\n")
+            print(f"Operations: {operations}\n")
+            print(f"Delta time: {dt}\n")
+            print(f"F(root):\n{F(root)}\n")
+        else:
+            print(f"Modified method failed\n")
+    except OverflowError:
+        print(f"Modified method failed\n")
 
-    if success:
-        print(f"Root:\n{root}\n")
-        print(f"Iterations: {iterations}\n")
-        print(f"Operations: {operations}\n")
-        print(f"Delta time: {dt}\n")
-        print(f"F(root):\n{F(root)}\n")
-    else:
-        print("Hybrid method failed")
-except OverflowError:
-    print("Hybrid method failed")
+print("\nHYBRID NEWTON METHOD\n")
+
+for i in range(1, 10 + 1):
+
+    print(f"k = {i}\n")
+    
+    try:
+        success, root, iterations, operations, dt = hyprid_appr(F, J, x, 1e-4, i)
+
+        if success:
+            print(f"Root:\n{root}\n")
+            print(f"Iterations: {iterations}\n")
+            print(f"Operations: {operations}\n")
+            print(f"Delta time: {dt}\n")
+            print(f"F(root):\n{F(root)}\n")
+        else:
+            print(f"Hybrid method failed\n")
+    except OverflowError:
+        print(f"Hybrid method failed\n")
